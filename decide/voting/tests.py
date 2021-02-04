@@ -15,7 +15,6 @@ from mixnet.mixcrypt import MixCrypt
 from mixnet.models import Auth
 from voting.models import Voting, Question, QuestionOption
 
-
 class VotingModelTestCase(BaseTestCase):
 
     def setUp(self):
