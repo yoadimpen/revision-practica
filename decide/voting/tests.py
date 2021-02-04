@@ -16,6 +16,32 @@ from mixnet.models import Auth
 from voting.models import Voting, Question, QuestionOption
 
 
+class VotingModelTestCase(BaseTestCase):
+
+    def setUp(self):
+        q = Question(desc='pregunta')
+        q.save()
+
+        opt1 = QuestionOption(question=q, option='opcion 1')
+        opt1.save()
+        opt2 = QuestionOption(question=q, option='opcion 2')
+        opt2.save()
+
+        self.v = Voting(name='votacion', question=q)
+        self.v.save()
+        super().setUp()
+
+    def tearDown(self):
+        super().tearDown()
+        self.v = None
+
+    def testExist(self):
+        v = Voting.objects.get(name='votacion')
+        self.assertEquals(v.question.options.all()[0].option, 'opcion 1')
+        self.assertEquals(v.question.options.all()[1].option, 'opcion 2')
+        self.assertEquals(len(v.question.options.all()), 2)
+
+
 class VotingTestCase(BaseTestCase):
 
     def setUp(self):
