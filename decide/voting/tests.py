@@ -41,7 +41,6 @@ class VotingModelTestCase(BaseTestCase):
         self.assertEquals(v.question.options.all()[1].option, 'opcion 2')
         self.assertEquals(len(v.question.options.all()), 2)
 
-
 class VotingTestCase(BaseTestCase):
 
     def setUp(self):
@@ -49,6 +48,13 @@ class VotingTestCase(BaseTestCase):
 
     def tearDown(self):
         super().tearDown()
+
+    def test_update_voting_400(self):
+        v = self.create_voting()
+        data = {} #El campo action es requerido en la request
+        self.login()
+        response = self.client.put('/voting/{}/'.format(v.pk), data, format= 'json')
+        self.assertEquals(response.status_code, 400)
 
     def test_Voting_toString(self):
         v = self.create_voting()
