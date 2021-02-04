@@ -56,6 +56,21 @@ class VotingTestCase(BaseTestCase):
         response = self.client.put('/voting/{}/'.format(v.pk), data, format= 'json')
         self.assertEquals(response.status_code, 400)
 
+    def test_voting_creation_API(self):
+        self.login()
+        data = {
+            'name':'Example',
+            'desc':'Descripcion',
+            'question':'Go to',
+            'question_opt':['the mall', 'the bar', 'empire state building']
+        }
+        
+        response = self.client.post('/voting/', data, format='json')
+        self.assertEqual(response.status_code, 201)
+
+        v = Voting.objects.get(name='Example')
+        self.assertEqual(v.desc,'Descripcion')
+
     def test_Voting_toString(self):
         v = self.create_voting()
         self.assertEquals(str(v),"test voting")
