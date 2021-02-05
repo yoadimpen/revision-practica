@@ -17,7 +17,7 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install codacy-coverage
-  - pip install -q Django=$DJANGO_VERSION
+  - pip install -q Django==$DJANGO_VERSION
   - python setup.py -q install
 script:
   - cd decide
