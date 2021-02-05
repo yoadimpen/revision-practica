@@ -20,9 +20,13 @@ class AdminTestCase(StaticLiveServerTestCase):
         self.base = BaseTestCase()
         self.base.setUp()
 
-        options = webdriver.ChromeOptions()
+        #options = webdriver.ChromeOptions()
         #options.headless = True
-        self.driver = webdriver.Chrome(options=options)
+        #self.driver = webdriver.Chrome(options=options)
+
+        options = webdriver.FirefoxOptions()
+        options.headless = True
+        self.driver = webdriver.Firefox(options=options)
 
         super().setUp()
     
@@ -34,24 +38,39 @@ class AdminTestCase(StaticLiveServerTestCase):
         
 
     def test_simpleCorrectLogin(self):                    
-        self.driver.get(f'{self.live_server_url}/admin/')
-        self.driver.find_element_by_id('id_username').send_keys("admin")
-        self.driver.find_element_by_id('id_password').send_keys("qwerty")
-        self.driver.find_element_by_id('login-form').submit()
+        # self.driver.get(f'{self.live_server_url}/admin/')
+        # self.driver.find_element_by_id('id_username').send_keys("admin")
+        # self.driver.find_element_by_id('id_password').send_keys("qwerty")
+        # self.driver.find_element_by_id('login-form').submit()
         
-        #print(self.driver.current_url)
-        #In case of a correct loging, a element with id 'user-tools' is shown in the upper right part
-        self.assertTrue(len(self.driver.find_elements_by_id('user-tools'))==1) 
+        # self.assertTrue(len(self.driver.find_elements_by_id('user-tools'))==1)
+
+        self.driver.get(f'{self.live_server_url}/admin/')
+        time.sleep(5)
+        self.driver.find_element_by_id('id_username').send_keys('admin')
+        self.driver.find_element_by_id('id_password').send_keys('qwerty')
+        self.driver.find_element_by_id('login-form').submit()
+        time.sleep(5)
+        self.assertTrue(len(self.driver.find_elements_by_id('user-tools'))==1)
+        time.sleep(5)
 
     def test_simpleWrongLogin(self):
 
-        self.driver.get(f'{self.live_server_url}/admin/')
-        self.driver.find_element_by_id('id_username').send_keys("WRONG")
-        self.driver.find_element_by_id('id_password').send_keys("WRONG")       
-        self.driver.find_element_by_id('login-form').submit()
+        # self.driver.get(f'{self.live_server_url}/admin/')
+        # self.driver.find_element_by_id('id_username').send_keys("WRONG")
+        # self.driver.find_element_by_id('id_password').send_keys("WRONG")       
+        # self.driver.find_element_by_id('login-form').submit()
 
-        #In case a incorrect login, a div with class 'errornote' is shown in red!
+        # self.assertTrue(len(self.driver.find_elements_by_class_name('errornote'))==1)
+        self.driver.get(f'{self.live_server_url}/admin/logout/')
+        self.driver.get(f'{self.live_server_url}/admin/')
+        self.driver.find_element_by_id('id_username').send_keys('what')
+        self.driver.find_element_by_id('id_password').send_keys('what')
+        self.driver.find_element_by_id('login-form').submit()
+        time.sleep(5)
+
         self.assertTrue(len(self.driver.find_elements_by_class_name('errornote'))==1)
+        time.sleep(5)
 
     # def test_preguntaCreacion(self):
 
