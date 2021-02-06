@@ -1,42 +1,42 @@
 dist: xenial
-
 services:
-  - postgresql
-  - xvfb
+- postgresql
+- xvfb
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
   apt:
     sources:
-      - google-chrome
+    - google-chrome
     packages:
-      - google-chrome-stable
+    - google-chrome-stable
 before_script:
-  - "export DISPLAY=99:0"
-  - sleep 3
-  - psql -U postgres -c "create user decide password 'decide'"
-  - psql -U postgres -c "create database test_decide owner decide"
-  - psql -U postgres -c "ALTER USER decide CREATEDB"
+- export DISPLAY=99:0
+- sleep 3
+- psql -U postgres -c "create user decide password 'decide'"
+- psql -U postgres -c "create database test_decide owner decide"
+- psql -U postgres -c "ALTER USER decide CREATEDB"
 language: python
 python:
-  - "3.6"
+- '3.6'
 install:
-  - pip install -r requirements.txt
-  - pip install codacy-coverage
-  - pip install selenium
-  - wget "https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz"
-  - tar xfz geckodriver-v0.24.0-linux64.tar.gz
-  - sudo mv geckodriver /usr/local/bin
-  - export DISPLAY=:99.0
-  - sleep 3
+- pip install -r requirements.txt
+- pip install codacy-coverage
+- pip install selenium
+- wget "https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz"
+- tar xfz geckodriver-v0.24.0-linux64.tar.gz
+- sudo mv geckodriver /usr/local/bin
+- export DISPLAY=:99.0
+- sleep 3
 script:
-  - cd decide
-  - cp travis_local_settings.py local_settings.py
-  - coverage run --branch --source=. ./manage.py test mixnet --keepdb
-  - coverage xml
-  - python-codacy-coverage -r coverage.xml
+- cd decide
+- cp travis_local_settings.py local_settings.py
+- coverage run --branch --source=. ./manage.py test mixnet --keepdb
+- coverage xml
+- python-codacy-coverage -r coverage.xml
 deploy:
   provider: heroku
   app: lab-egc
   strategy: git
-  api_key: $HEROKU_AUTH_TOKEN
   on: lab7-workaround
+  api_key:
+    secure: FdnOJ02jBwEJB0TLwHzsrbBvgpGbRo2jXiJGYbz8CtJQw/Kg1wHNUIl2KY5u3cG9u3Uhr4cfA/nHtQ1ucJ8bxoIq2GACVO/Pr2kdRn/JP1EgYL9vzrelXxMDXFKkCmPHZYR77xAIgNHMX52oD0zQqIvltIxd5PtqZu+2Qa/cm1Eom9KX/t2u31qCWe/M4E+NpqUudJt9sBSb/6AZ3uwnxVRSy8zjDGkc7J12j7MWRYR3Xd9FWURRn1aMap6o2oBx2yKU6oV9aHJaeWN2L3gejgd/SjufhJ/rCdK5n9GKTLvFJLy/1ZvJZLckwWREbvs/tqEEjxauLyur4KJizK8cupaq/udWZQEMQ6jD194ugLzGyMrtJLT2JXZAWs931JWnQfRvHcSNAJ8ROSgGewvScMxFTZmmlRnuDlxZlX9BB27JoKFG4iN/3Pfa0hggi3oT+QGt/InxiSzlzoELHH9zno1J1DugOo19wd8CPwKE1CJwFVOdl0SllPWLPoCJQ/8IuJHc1TUm8A71PFMVmaXJe60OA+BMvn1whsCyjubHP6xv3BXNdB3H/9V81TKcETAKwtRG3apVmI1gNsNXWSbLXFxlFMtnltttN0ALlghaZ3B5dNhzhRHopnYLGml9NeL2Yudc8x1jiNFyU2Y75P31kAtleEnR6Z86QSjUJJjL8Qg=
