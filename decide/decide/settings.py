@@ -158,8 +158,6 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
 
@@ -183,7 +181,7 @@ if os.path.exists("config.jsonnet"):
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
 
-BASEURL = 'https://lab-egc.herokuapp.com/'
+BASEURL = 'https://lab-egc.herokuapp.com'
 
 APIS = {}
 
