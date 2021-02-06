@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.com/wadobo/decide.svg?branch=master)](https://travis-ci.com/wadobo/decide) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/94a85eaa0e974c71af6899ea3b0d27e0)](https://www.codacy.com/app/Wadobo/decide?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wadobo/decide&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/94a85eaa0e974c71af6899ea3b0d27e0)](https://www.codacy.com/app/Wadobo/decide?utm_source=github.com&utm_medium=referral&utm_content=wadobo/decide&utm_campaign=Badge_Coverage)
 
+Lab 3 - Status
+--------------
+[![Build Status](https://travis-ci.com/yoadimpen/revision-practica.svg?branch=lab3-ci)](https://travis-ci.com/yoadimpen/revision-practica)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/944bbca4598146678dadb7db8d66f941)](https://www.codacy.com/gh/yoadimpen/revision-practica/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yoadimpen/revision-practica&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/944bbca4598146678dadb7db8d66f941)](https://www.codacy.com/gh/yoadimpen/revision-practica/dashboard?utm_source=github.com&utm_medium=referral&utm_content=yoadimpen/revision-practica&utm_campaign=Badge_Coverage)
+
 Plataforma voto electrónico educativa
 =====================================
 

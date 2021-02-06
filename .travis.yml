@@ -1,0 +1,36 @@
+dist: xenial
+
+services:
+  - postgresql
+  - xvfb
+addons:
+  postgresql: "9.4"
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+before_script:
+  - "export DISPLAY=99:0"
+  - sleep 3
+  - psql -U postgres -c "create user decide password 'decide'"
+  - psql -U postgres -c "create database test_decide owner decide"
+  - psql -U postgres -c "ALTER USER decide CREATEDB"
+language: python
+python:
+  - "3.6"
+install:
+  - pip install -r requirements.txt
+  - pip install codacy-coverage
+  - pip install selenium
+  - wget "https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz"
+  - tar xfz geckodriver-v0.24.0-linux64.tar.gz
+  - sudo mv geckodriver /usr/local/bin
+  - export DISPLAY=:99.0
+  - sleep 3
+script:
+  - cd decide
+  #- cp travis_local_settings.py local_settings.py
+  - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
+  - coverage xml
+  - python-codacy-coverage -r coverage.xml

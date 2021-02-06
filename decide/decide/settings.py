@@ -156,6 +156,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+
 STATIC_URL = '/static/'
 
 # number of bits for the key, all auths should use the same number of bits
@@ -180,3 +181,10 @@ if os.path.exists("config.jsonnet"):
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
+
+BASEURL = 'https://lab-egc.herokuapp.com'
+
+APIS = {}
+
+import django_heroku
+django_heroku.settings(locals())
