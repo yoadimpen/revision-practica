@@ -182,7 +182,7 @@ if os.path.exists("config.jsonnet"):
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
 
-BASEURL = 'https://lab-egc.herokuapp.com'
+#BASEURL = 'https://lab-egc.herokuapp.com'
 
 APIS = {}
 
